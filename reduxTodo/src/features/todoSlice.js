@@ -2,9 +2,7 @@ import {createSlice,nanoid} from '@reduxjs/toolkit';
 
 
 
-function sayHello(){
-    console.log("Hello world");
-}
+
 
 const initialState   = {
     todos:[{id: 1 ,text:"Hello world"}]
@@ -17,12 +15,12 @@ export const todoSlice = createSlice({
         addTodo: (state,action)=>{
             const todo = {
                 id:nanoid(),
-                text:action.payload.text
+                text:action.payload
             }
             state.todos.push(todo)
         },
         removeTodo:(state,action)=>{
-            return state.filter((todo)=> todo.id !== action.payload.id)   // action ke sath match nai hona chiye
+             state.todos = state.todos.filter((todo)=> todo.id !== action.payload)   // action ke sath match nai hona chiye
         },
         updateTodo:(state,action)=>{
             return state.map((todo)=> todo.id === action.payload.id ?{...todo,text:action.payload.text} :todo); // map ka use karke todo find karo state me se and than uska text action se update karo
